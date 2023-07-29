@@ -17,25 +17,29 @@ def index():
 def get_nutrition():
     food_item = request.form['food_item']
     
-    params = {'ingr': food_item, 'app_key': api_key}
-    url = "https://api.edamam.com/api/nutrition-data"
-    response = requests.post(url, params=params)
+    params = {'query': food_item, 'api_key': api_key}
+    url = "https://api.nal.usda.gov/fdc/v1/foods/search"
+    response = requests.get(url, params=params)
     
     if response.status_code == 200:
         data = response.json()
-        nutrition_data = {
-            "Food Item": data["text"],
-            "Calories": data["calories"],
-            "Protein": data["totalNutrients"]["PROCNT"]["quantity"],
-            "Carbohydrates": data["totalNutrients"]["CHOCDF"]["quantity"],
-            "Fat": data["totalNutrients"]["FAT"]["quantity"],
-            "Fiber": data["totalNutrients"]["FIBTG"]["quantity"],
-            "Sodium": data["totalNutrients"]["NA"]["quantity"],
-        }
-        return jsonify(nutrition_data)
+        if "foods" in data and data["foods"]:
+            food = data["foods"][0]
+            nutrients = food.get("foodNutrients", [])
+            nutrition_data = {
+                "Food Item": food["description"],
+                "Calories": food.get("foodNutrients", {}).get("energyKcal", 0),
+                "Protein": next((n["amount"] for n in nutrients if n["nutrientName"] == "Protein"), 0),
+                "Carbohydrates": next((n["amount"] for n in nutrients if n["nutrientName"] == "Carbohydrate, by difference"), 0),
+                "Fat": next((n["amount"] for n in nutrients if n["nutrientName"] == "Total lipid (fat)"), 0),
+                "Fiber": next((n["amount"] for n in nutrients if n["nutrientName"] == "Fiber, total dietary"), 0),
+                "Sodium": next((n["amount"] for n in nutrients if n["nutrientName"] == "Sodium, Na"), 0),
+            }
+            return jsonify(nutrition_data)
+        else:
+            return jsonify({"error": "Food item not found in the database."}), 404
     else:
-        return jsonify({"Error: " "Error"}), 400
-    
+        return jsonify({"error": "Unable to retrieve nutrition data. Please try again."}), 400
     
 if __name__ == "__main__":
     app.run()
