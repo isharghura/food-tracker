@@ -7,7 +7,7 @@ const params = {
     api_key: config.api_key,
     query: "apple",
     dataType: ["Survey (FNDDS)"],
-    pagesize: 5,
+    pagesize: 1,
 }
 
 const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(params.api_key)}&query=${encodeURIComponent(params.query)}&dataType=${encodeURIComponent(params.dataType)}&pageSize=${encodeURIComponent(params.pagesize)}`
