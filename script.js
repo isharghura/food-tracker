@@ -1,3 +1,5 @@
+//search bar functionality
+
 const input = document.getElementById("user-input")
 const title = document.getElementById("title")
 
