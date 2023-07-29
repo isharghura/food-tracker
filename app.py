@@ -13,13 +13,13 @@ api_key = config_data["api_key"]
 def index():
     return render_template('index.html')
 
-@app.route('/get_nutrition', methods=['POST'])
+@app.route('/get_nutrition_facts', methods=['POST'])
 def get_nutrition():
     food_item = request.form['food_item']
     
     params = {'ingr': food_item, 'app_key': api_key}
     url = "https://api.edamam.com/api/nutrition-data"
-    response = requests.get(url)
+    response = requests.post(url, params=params)
     
     if response.status_code == 200:
         data = response.json()
