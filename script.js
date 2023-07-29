@@ -11,7 +11,7 @@ document.addEventListener('keydown', (event) => {
 })
 
 function getNutritionFacts() {
-    fetch('/get_nutrition', {
+    fetch('/get_nutrition_facts', {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"

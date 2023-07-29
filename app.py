@@ -18,7 +18,7 @@ def get_nutrition():
     food_item = request.form['food_item']
     
     params = {'ingr': food_item, 'app_key': api_key}
-    url = f"https://developer.nrel.gov/api/alt-fuel-stations/v1.json?limit=1&api_key={'api_key'}"
+    url = "https://api.edamam.com/api/nutrition-data"
     response = requests.get(url)
     
     if response.status_code == 200:
@@ -32,6 +32,9 @@ def get_nutrition():
             "Fiber": data["totalNutrients"]["FIBTG"]["quantity"],
             "Sodium": data["totalNutrients"]["NA"]["quantity"],
         }
+        return jsonify(nutrition_data)
+    else:
+        return jsonify({"Error: " "Error"}), 400
     
     
 if __name__ == "__main__":
