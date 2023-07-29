@@ -16,7 +16,7 @@ function getNutritionFacts() {
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: `food_item=${encodeURIComponent(input)}`
+        body: `food_item=${encodeURIComponent(input.value)}`
     })
         .then(response => response.json())
         .then(data => {
