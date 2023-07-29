@@ -8,3 +8,31 @@ with open('config.json') as config:
     config_data = json.load(config)
     
 api_key = config_data["api_key"]
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/get_nutrition', methods=['POST'])
+def get_nutrition():
+    food_item = request.form['food_item']
+    
+    params = {'ingr': food_item, 'app_key': api_key}
+    url = f"https://developer.nrel.gov/api/alt-fuel-stations/v1.json?limit=1&api_key={'api_key'}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        nutrition_data = {
+            "Food Item": data["text"],
+            "Calories": data["calories"],
+            "Protein": data["totalNutrients"]["PROCNT"]["quantity"],
+            "Carbohydrates": data["totalNutrients"]["CHOCDF"]["quantity"],
+            "Fat": data["totalNutrients"]["FAT"]["quantity"],
+            "Fiber": data["totalNutrients"]["FIBTG"]["quantity"],
+            "Sodium": data["totalNutrients"]["NA"]["quantity"],
+        }
+    
+    
+if __name__ == "__main__":
+    app.run()
