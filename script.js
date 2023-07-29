@@ -10,8 +10,8 @@ document.addEventListener('keydown', (event) => {
     }
 })
 
-function getNutritionFacts() {
-    fetch('/get_nutrition_facts', {
+function getNutrition() {
+    fetch('/get_nutrition', {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
