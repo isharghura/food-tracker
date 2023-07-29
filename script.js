@@ -1,4 +1,3 @@
-const searchBar = document.getElementById("search-bar")
 const input = document.getElementById("user-input")
 const title = document.getElementById("title")
 
