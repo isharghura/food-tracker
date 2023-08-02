@@ -5,7 +5,7 @@ import config from "./config.json" assert {type: "json"}
 
 const params = {
     api_key: config.apikey,
-    query: "apple",
+    query: "sugar",
     dataType: ["Survey (FNDDS)"],
     pagesize: 1,
 }
