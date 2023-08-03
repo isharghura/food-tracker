@@ -1,27 +1,25 @@
 import config from "./config.json" assert {type: "json"}
 
+const input = document.getElementById("user-input");
 const title = document.getElementById("title");
 
 //fetch nutritional data of input
-function getData() {
-    const inputValue = input.value;
-    const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(config.apikey)}&query=${encodeURIComponent(inputValue)}&dataType=${encodeURIComponent("Survey (FNDDS)")}&pageSize=${encodeURIComponent(1)}`;
-    return fetch(api_url).then(response => response.json());
+async function getData(query) {
+    const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(config.apikey)}&query=${encodeURIComponent(query)}&dataType=${encodeURIComponent("Survey (FNDDS)")}&pageSize=${encodeURIComponent(1)}`;
+    const response = await fetch(api_url);
+    return response.json();
 }
 
 //when a key is pressed
-document.addEventListener('keydown', (event) => {
+document.addEventListener('keydown', async (event) => {
     var isEnterKey = event.key;
     if (isEnterKey === 'Enter' && input.value !== '') {
-        const input = document.getElementById("user-input");
-
         //display nutrient facts
-        getData().then(data => {
-            const nutrients = data.foods[0].foodNutrients;
-            nutrients.forEach(nutrient => {
-                const { nutrientName, value, unitName } = nutrient;
-                console.log(`${nutrientName}: ${value} ${unitName}`);
-            });
+        const data = await getData(input.value);
+        const nutrients = data.foods[0].foodNutrients;
+        nutrients.forEach(nutrient => {
+            const { nutrientName, value, unitName } = nutrient;
+            console.log(`${nutrientName}: ${value} ${unitName}`);
         });
 
         title.innerHTML = input.value;
