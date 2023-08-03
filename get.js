@@ -5,7 +5,7 @@ import config from "./config.json" assert {type: "json"}
 
 const params = {
     api_key: config.apikey,
-    query: "apple",
+    query: "quinoa",
     dataType: ["Survey (FNDDS)"],
     pagesize: 1,
 }
@@ -20,6 +20,6 @@ getData().then(data => {
     const nutrients = data.foods[0].foodNutrients;
     nutrients.forEach(nutrient => {
         const { nutrientName, value, unitName } = nutrient;
-        console.log(`Nutrient: ${nutrientName}, Value: ${value} ${unitName}`);
+        console.log(`${nutrientName}: ${value} ${unitName}`);
     });
 });
