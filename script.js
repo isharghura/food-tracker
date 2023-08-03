@@ -4,8 +4,8 @@ const input = document.getElementById("user-input");
 const title = document.getElementById("title");
 
 //fetch nutritional data of input
-async function getData(query) {
-    const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(config.apikey)}&query=${encodeURIComponent(query)}&dataType=${encodeURIComponent("Survey (FNDDS)")}&pageSize=${encodeURIComponent(1)}`;
+async function getData(inputData) {
+    const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(config.apikey)}&query=${encodeURIComponent(inputData)}&dataType=${encodeURIComponent("Survey (FNDDS)")}&pageSize=${encodeURIComponent(1)}`;
     const response = await fetch(api_url);
     return response.json();
 }
