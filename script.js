@@ -16,7 +16,7 @@ document.addEventListener('keydown', async (event) => {
             output += `${nutrientName}: ${value} ${unitName}<br>`;
         });
         factsList.innerHTML = output;
-        title.innerHTML = input.value;
+        title.innerHTML = input.value + " (100g)";
         input.value = '';
     }
 });
