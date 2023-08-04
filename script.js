@@ -6,14 +6,13 @@ document.addEventListener('keydown', async (event) => {
 
     var isEnterKey = event.key;
     if (isEnterKey === 'Enter' && input.value !== '') {
-        factsList.innerHTML = "";
         //display nutrient facts
         const data = await getData(input.value);
+        factsList.innerHTML = "";
         const nutrients = data.foods[0].foodNutrients;
         let output = "";
         nutrients.forEach(nutrient => {
             const { nutrientName, value, unitName } = nutrient;
-
             output += `${nutrientName}: ${value} ${unitName}<br>`;
         });
         factsList.innerHTML = output;
