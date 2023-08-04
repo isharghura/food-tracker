@@ -1,5 +1,6 @@
 const input = document.getElementById("user-input");
 const title = document.getElementById("title");
+const factsList = document.getElementById("nutrition-facts");
 
 //fetch nutritional data of input
 async function getData(inputData) {
@@ -18,7 +19,12 @@ document.addEventListener('keydown', async (event) => {
         const nutrients = data.foods[0].foodNutrients;
         nutrients.forEach(nutrient => {
             const { nutrientName, value, unitName } = nutrient;
-            console.log(`${nutrientName}: ${value} ${unitName}`);
+
+            let fact = document.createElement("p");
+            fact.id = "fact";
+            fact.innerHTML = `${nutrientName}: ${value} ${unitName}`
+
+            factsList.appendChild(fact)
         });
 
         title.innerHTML = input.value;
