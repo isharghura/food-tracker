@@ -23,7 +23,7 @@ document.addEventListener('keydown', async (event) => {
 
 //fetch nutritional data of input
 async function getData(inputData) {
-    const config = await fetch("../config.json").then(response => response.json());
+    const config = await fetch("/static/config.json").then(response => response.json());
     const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(config.apikey)}&query=${encodeURIComponent(inputData)}&dataType=${encodeURIComponent("Foundation")}&pageSize=${encodeURIComponent(1)}`;
     const response = await fetch(api_url);
     return response.json();
