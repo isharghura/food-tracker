@@ -18,6 +18,7 @@ document.addEventListener('keydown', async (event) => {
         factsList.innerHTML = output;
         title.innerHTML = input.value + " (100g)";
         input.value = '';
+
     }
 });
 
