@@ -1,6 +1,0 @@
-{
-    "type": "module",
-    "dependencies": {
-        "node-fetch": "^9.3.1"
-    }
-}
