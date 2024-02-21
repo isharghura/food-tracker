@@ -14,7 +14,7 @@ app.get('/', async (req, res) => {
     res.sendFile(indexPath);
 })
 
-app.get('/api/getData/:inputData', async (req, res) => {
+app.get('/https://food-tracker-rpwo.onrender.com:3000/:inputData', async (req, res) => {
     console.log(process.env.message);
     const inputData = req.params.inputData;
     const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(process.env.apikey)}&query=${encodeURIComponent(inputData)}&dataType=${encodeURIComponent("Foundation")}&pageSize=${encodeURIComponent(1)}`;
