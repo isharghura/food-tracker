@@ -10,6 +10,10 @@ app.get('/', async (req, res) => {
     res.sendFile(__dirname + '/templates/index.html');
 })
 
+app.get('/test', async (req, res) => {
+    res.json(process.env.test);
+})
+
 app.get('/getData/:inputData', async (req, res) => {
     console.log(process.env.message);
     const inputData = req.params.inputData;

@@ -2,6 +2,12 @@ const input = document.getElementById("user-input");
 const title = document.getElementById("title");
 const factsList = document.getElementById("nutrition-facts");
 
+document.addEventListener('DOMContentLoaded', async (event) => {
+    const test = await fetch('/test');
+    const testData = await test.json();
+    console.log(testData);
+})
+
 document.addEventListener('keydown', async (event) => {
     if (event.key === 'Enter' && input.value !== '') {
         console.log("recieving data!");
