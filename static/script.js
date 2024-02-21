@@ -4,7 +4,8 @@ const factsList = document.getElementById("nutrition-facts");
 
 document.addEventListener('keydown', async (event) => {
     if (event.key === 'Enter' && input.value !== '') {
-        const response = await fetch(`/https://food-tracker-rpwo.onrender.com:3000/${encodeURIComponent(input.value)}`);
+        console.log("recieving data!");
+        const response = await fetch(`/getData/${encodeURIComponent(input.value)}`);
         const data = await response.json();
         console.log("recieved data!");
         factsList.innerHTML = "";

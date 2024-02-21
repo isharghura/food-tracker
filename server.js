@@ -1,20 +1,16 @@
 const express = require('express');
 let app = express();
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
+require('dotenv').config();
 const path = require('path');
-const envPath = path.join(__dirname, '..', '.env');
 
-dotenv.config({ path: envPath });
-
-app.use('/static', express.static(path.resolve(__dirname, '../static')));
+app.use('/static', express.static(path.resolve(__dirname + '/static')));
 
 app.get('/', async (req, res) => {
-    const indexPath = path.resolve(__dirname, '../templates/index.html');
-    res.sendFile(indexPath);
+    res.sendFile(__dirname + '/templates/index.html');
 })
 
-app.get('/https://food-tracker-rpwo.onrender.com:3000/:inputData', async (req, res) => {
+app.get('/getData/:inputData', async (req, res) => {
     console.log(process.env.message);
     const inputData = req.params.inputData;
     const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(process.env.apikey)}&query=${encodeURIComponent(inputData)}&dataType=${encodeURIComponent("Foundation")}&pageSize=${encodeURIComponent(1)}`;
