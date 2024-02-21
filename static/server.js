@@ -1,8 +1,11 @@
 const express = require('express');
 let app = express();
 const fetch = require('node-fetch');
-require('dotenv').config();
+const dotenv = require('dotenv');
 const path = require('path');
+const envPath = path.join(__dirname, '..', '.env');
+
+dotenv.config({ path: envPath });
 
 app.use('/static', express.static(path.resolve(__dirname, '../static')));
 
