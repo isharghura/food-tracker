@@ -6,6 +6,7 @@ document.addEventListener('keydown', async (event) => {
     if (event.key === 'Enter' && input.value !== '') {
         const response = await fetch(`/api/getData/${encodeURIComponent(input.value)}`);
         const data = await response.json();
+        console.log("recieved data!");
         factsList.innerHTML = "";
         const nutrients = data.foods[0].foodNutrients;
         let output = "";
