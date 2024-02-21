@@ -1,8 +1,6 @@
 from flask import Flask, render_template
-from flask_cors import CORS
 
-app = Flask(__name__, static_folder='static', static_url_path='/static')
-CORS(app)
+app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
 def index():
