@@ -15,6 +15,7 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/api/getData/:inputData', async (req, res) => {
+    console.log(process.env.message);
     const inputData = req.params.inputData;
     const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(process.env.apikey)}&query=${encodeURIComponent(inputData)}&dataType=${encodeURIComponent("Foundation")}&pageSize=${encodeURIComponent(1)}`;
     try {
